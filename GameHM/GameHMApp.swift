@@ -12,6 +12,7 @@ struct GameHMApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            CardView(currentCard: nil)
         }
     }
 }
