@@ -12,7 +12,8 @@ public var backSideCardImageURL = "Image default"
 
 public enum ConstantContentView {
     static let sizeAvatar: CGFloat = 100
-    static let sizeCard: CGFloat = 50
+    static let sizeCardWidth: CGFloat = 40
+    static let sizeCardHeight: CGFloat = 60
     static let radiuscard: CGFloat = 10
     static let radiusTopView: CGFloat = 20
     static let shadowRadius: CGFloat = 8
@@ -29,9 +30,11 @@ struct BorderRadius: ViewModifier {
             .padding()
             .overlay(
                 RoundedRectangle(cornerRadius: radius)
-                                .stroke(Color("darkRed"), lineWidth: lineWidth)
+                    .stroke(Color.black, lineWidth: lineWidth)
             )
             .background(Color.white)
             .cornerRadius(radius)
     }
 }
+
+public var listImageCard: [String] = ["charmander","eevee","meowth", "pikachu", "pokeball", "psyduck", "snorlax", "valor"]

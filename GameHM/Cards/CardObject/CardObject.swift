@@ -7,7 +7,9 @@
 
 import UIKit
 
-class CardObject: ObservableObject {
-    @Published var idCard: String = ""
-    @Published var image: String = ""
+struct CardObject: Identifiable {
+    var id = UUID()
+    var idCard: String = ""
+    var image: String = ""
+    var isMatch = false
 }
