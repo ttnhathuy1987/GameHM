@@ -16,6 +16,8 @@
 		B175584526721AEA001150BA /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B175584426721AEA001150BA /* Constant.swift */; };
 		B186079D26774D7100DDF032 /* HandlerFlip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B186079C26774D7100DDF032 /* HandlerFlip.swift */; };
 		B18607A126785D3800DDF032 /* GridFlipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18607A026785D3800DDF032 /* GridFlipView.swift */; };
+		B1F289AB2679AC3E00348F80 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F289AA2679AC3E00348F80 /* ScoreView.swift */; };
+		B1F289B02679D95E00348F80 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F289AF2679D95E00348F80 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		B175584426721AEA001150BA /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B186079C26774D7100DDF032 /* HandlerFlip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlerFlip.swift; sourceTree = "<group>"; };
 		B18607A026785D3800DDF032 /* GridFlipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridFlipView.swift; sourceTree = "<group>"; };
+		B1F289AA2679AC3E00348F80 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
+		B1F289AF2679D95E00348F80 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 		B17558382672122A001150BA /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				B1F289AE2679D95100348F80 /* MainView */,
+				B1F289A92679AC2700348F80 /* CustomView */,
 				B186079B26774D5F00DDF032 /* Handler */,
 				B175584326721ADD001150BA /* Constant */,
 				B175583B2672123D001150BA /* CardObject */,
@@ -122,6 +128,22 @@
 				B18607A026785D3800DDF032 /* GridFlipView.swift */,
 			);
 			path = Handler;
+			sourceTree = "<group>";
+		};
+		B1F289A92679AC2700348F80 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				B1F289AA2679AC3E00348F80 /* ScoreView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		B1F289AE2679D95100348F80 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				B1F289AF2679D95E00348F80 /* LoginView.swift */,
+			);
+			path = MainView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,7 +216,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B175583D26721277001150BA /* CardObject.swift in Sources */,
+				B1F289AB2679AC3E00348F80 /* ScoreView.swift in Sources */,
 				B186079D26774D7100DDF032 /* HandlerFlip.swift in Sources */,
+				B1F289B02679D95E00348F80 /* LoginView.swift in Sources */,
 				B175582926720BF2001150BA /* ContentView.swift in Sources */,
 				B175584526721AEA001150BA /* Constant.swift in Sources */,
 				B1755841267212BF001150BA /* CardView.swift in Sources */,

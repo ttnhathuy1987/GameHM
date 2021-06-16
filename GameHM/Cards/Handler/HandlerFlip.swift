@@ -24,16 +24,34 @@ class ControlFlipCase: ObservableObject {
         
         var listCopyImage = listImageCard
         dataFlip.removeAll()
+        
+        var dataMatch: [CardObject] = []
+        var dataDuplicate: [CardObject] = []
+        
         for i in 0..<count {
             let randowIndex = Int(arc4random()) % listCopyImage.count
             var item = CardObject()
             item.idCard = "\(i + 1)"
             item.image = listCopyImage[randowIndex];
-            dataFlip.append(item)
+            dataMatch.append(item)
+            dataDuplicate.append(item)
             listCopyImage.remove(at: randowIndex)
         }
+        
+        for _ in 0..<count {
+            let randowIndex = Int(arc4random()) % dataMatch.count
+            let randowIndexTemp = Int(arc4random()) % dataDuplicate.count
+            
+            dataFlip.append(dataMatch[randowIndex])
+            dataFlip.append(dataDuplicate[randowIndexTemp])
+            dataMatch.remove(at: randowIndex)
+            dataDuplicate.remove(at: randowIndexTemp)
+        }
+        
         print("\(dataFlip.count)")
         // General copy cards
+        
+        
         
     }
     
