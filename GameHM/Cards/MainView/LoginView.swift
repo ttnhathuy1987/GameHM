@@ -14,6 +14,9 @@ struct LoginView: View {
     
     @State var isLoginSuccess = false
     
+    @State private var speed:Float = 2
+    @State private var isEditing = false
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -24,22 +27,31 @@ struct LoginView: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: 0.5)
                         )
-                    Spacer(minLength: 20)
-                    Text("Password")
-                    TextField("Password", text: $password)
-                        .padding(EdgeInsets(top: 8, leading: 10, bottom: 8, trailing: 10))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: 0.5)
-                        )
+//                    Spacer(minLength: 20)
+//                    Text("Password")
+//                    TextField("Password", text: $password)
+//                        .padding(EdgeInsets(top: 8, leading: 10, bottom: 8, trailing: 10))
+//                        .overlay(
+//                            RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: 0.5)
+//                        )
+                    Spacer(minLength: 40)
                     VStack(alignment: .center) {
-                        Button("Login") {
+
+                        Text("Level: \(Int(speed))")
+                        Slider(value: $speed, in: 2...8, step: 1, onEditingChanged: { (editing) in
+                            
+                        }, minimumValueLabel: Text("2"), maximumValueLabel: Text("8")) {
+                            Text("\(Int(speed))")
+                        }.accentColor(Color.green)
+                        Spacer(minLength: 40)
+                        Button("Play") {
                             isLoginSuccess = true
                         }.frame(width: 100, height: 40, alignment: .center)
                     }.frame(maxWidth: .infinity)
                 }.padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
             }.background(
                 NavigationLink(
-                    destination: ContentView(),
+                    destination: ContentView(userName:username, numberCard: Int(speed)),
                     isActive: $isLoginSuccess,
                     label: {
                         EmptyView()

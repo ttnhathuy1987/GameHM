@@ -7,12 +7,19 @@
 
 import SwiftUI
 
+protocol GridFlipViewDelegate {
+    func winRoundFlip(view: GridFlipView)
+}
+
+
 struct GridFlipView: View {
     
-    @StateObject var controlFlip = ControlFlipCase()
+    @ObservedObject var controlFlip: ControlFlipCase
     
-    var currentCardID = ""
-    var previousCardID = ""
+    @State var updateView = false
+    
+    var delegate: GridFlipViewDelegate?
+    var numerCard: Int
     
     
     var body: some View {
@@ -20,15 +27,11 @@ struct GridFlipView: View {
             LazyVGrid(columns: ConstantContentView.columns, alignment: HorizontalAlignment.center, spacing: 10.0) {
                 
                 ForEach(controlFlip.dataFlip.indices, id: \.self) { index in
-                    CardView(currentCard: $controlFlip.dataFlip[index], isFlip: false, delegate: self)
+                    CardView(currentCard: $controlFlip.dataFlip[index], delegate: self)
                 }
-                
-//                ForEach(controlFlip.dataFlip) { item in
-//                    CardView(currentCard: $item, isFlip: false, delegate: self)
-//                }
             }.padding()
         }.onAppear {
-            controlFlip.generateDataFlip(count: 6)
+            controlFlip.generateDataFlip(count: numerCard)
         }
     }
 }
@@ -36,12 +39,15 @@ struct GridFlipView: View {
 
 extension GridFlipView: CardViewDelegate {
     func clickAtCardView(view: CardView) {
-        
+        controlFlip.handleChangeStatusFlip(currentCard: view.currentCard)
+        if controlFlip.checkWinStage() {
+            delegate?.winRoundFlip(view: self)
+        }
     }
 }
 
 struct GridFlipView_Previews: PreviewProvider {
     static var previews: some View {
-        GridFlipView()
+        GridFlipView(controlFlip:ControlFlipCase(), numerCard: 6)
     }
 }
