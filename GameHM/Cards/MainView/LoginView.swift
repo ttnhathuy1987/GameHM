@@ -51,7 +51,7 @@ struct LoginView: View {
                 }.padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
             }.background(
                 NavigationLink(
-                    destination: ContentView(userName:username, numberCard: Int(speed)),
+                    destination: MainDrawing(),
                     isActive: $isLoginSuccess,
                     label: {
                         EmptyView()
@@ -61,7 +61,7 @@ struct LoginView: View {
         }.edgesIgnoringSafeArea(.all)
     }
 }
-
+//ContentView(userName:username, numberCard: Int(speed))
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
