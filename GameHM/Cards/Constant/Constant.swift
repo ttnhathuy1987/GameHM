@@ -92,3 +92,82 @@ struct AnimationRotation3DModifier: AnimatableModifier {
 //        return modifier(AnimationCompletionObserverModifier(observedValue: value, completion: completion))
 //    }
 //}
+
+struct Constant {
+    static func getDocumentsDirectory() -> URL {
+        // find all possible documents directories for this user
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+
+        // just send back the first one, which ought to be the only one
+        return paths[0]
+    }
+    
+    static func getImageDocumentsDirectory() -> URL {
+        // find all possible documents directories for this user
+        var paths = Constant.getDocumentsDirectory()
+        paths = paths.appendingPathComponent("ImageSource")
+        return paths
+    }
+    
+    static func createImageDirectory() {
+        let dataPath = Constant.getImageDocumentsDirectory()
+        if !FileManager.default.fileExists(atPath: dataPath.absoluteString) {
+            // Creates that folder if not exists
+            try? FileManager.default.createDirectory(atPath: dataPath.absoluteString, withIntermediateDirectories: false, attributes: nil)
+        }
+    }
+    
+    static func saveImage(image: UIImage, fileName: String) -> Bool {
+        guard let data = image.jpegData(compressionQuality: 1) ?? image.pngData() else {
+            return false
+        }
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
+            return false
+        }
+        do {
+            try data.write(to: directory.appendingPathComponent(fileName)!)
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+    }
+    
+    static func getSavedImage(named: String) -> UIImage? {
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
+        }
+        return nil
+    }
+    
+    static func getSavedImageWithPathg(path: String) -> UIImage? {
+        return UIImage(contentsOfFile: URL(fileURLWithPath: path).path)
+    }
+    
+    
+    static func getAllSavedImagePath() -> [String] {
+        var listImage: [String] = []
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            let items = try! FileManager.default.contentsOfDirectory(atPath: dir.absoluteString)
+            for item in items {
+                if item.hasPrefix("png") {
+                    listImage.append(item)
+                }
+            }
+        }
+        return listImage
+    }
+    
+    static func getAllImages() -> [UIImage] {
+        var listImage: [UIImage] = []
+        let listPath = Constant.getAllSavedImagePath()
+        for path in listPath {
+            if let image = Constant.getSavedImageWithPathg(path: path) {
+                listImage.append(image)
+            }
+        }
+        return []
+    }
+}
+
+

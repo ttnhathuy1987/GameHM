@@ -8,6 +8,10 @@
 
 import SwiftUI
 
+protocol DrawingControlsDelegate {
+    func snapshot()
+}
+
 struct DrawingControls: View {
     @Binding var color: Color
     @Binding var drawings: [ListDrawing]
@@ -15,6 +19,8 @@ struct DrawingControls: View {
     
     @State private var colorPickerShown = false
 
+    var delegate:DrawingControlsDelegate?
+    
     private let spacing: CGFloat = 40
     
     var body: some View {
@@ -31,6 +37,9 @@ struct DrawingControls: View {
                     }
                     Button("Clear") {
                         self.drawings = [ListDrawing]()
+                    }
+                    Button("Save") {
+                        self.delegate?.snapshot()
                     }
                 }
                 HStack {

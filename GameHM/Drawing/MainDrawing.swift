@@ -22,14 +22,38 @@ struct MainDrawing: View {
                        drawings: $drawings,
                        color: $color,
                        lineWidth: $lineWidth)
-            DrawingControls(color: $color, drawings: $drawings, lineWidth: $lineWidth)
+            DrawingControls(color: $color, drawings: $drawings, lineWidth: $lineWidth, delegate: self)
             
         }
     }
 }
 
+extension MainDrawing: DrawingControlsDelegate {
+    func snapshot() {
+        Constant.getImageDocumentsDirectory()
+    }
+}
+
+
 struct MainDrawing_Previews: PreviewProvider {
     static var previews: some View {
         MainDrawing()
+    }
+}
+
+extension View {
+    func snapshotView() -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        let view = controller.view
+
+        let targetSize = controller.view.intrinsicContentSize
+        view?.bounds = CGRect(origin: .zero, size: targetSize)
+        view?.backgroundColor = .clear
+
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+
+        return renderer.image { _ in
+            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+        }
     }
 }
